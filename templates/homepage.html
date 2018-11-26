@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bookmark Server</title>
+        <link rel=stylesheet type=text/css href="../static/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1 class="col-md-12 text-right">
+                    Bookmark-It
+                </h1>
+                <h2 class="col-md-12 text-right">
+                        Shorten those loooong URLs
+                </h2>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    Create a new bookmark!
+                    <!-- This can provide form for entering new site -->
+                    <form action="" method="post">
+                        Long URI:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="long_link"><br>
+                        Short name: 
+                        <input type="text" name="short_link"><br>
+                        <input type="submit" value="Add!">
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    URLs I know about:
+                    <!-- This can display the known shortforms -->
+                    {% if saved_urls %}
+                        {% for url in saved_urls %}
+                            <li>{{url.short_link}}: {{url.long_link}}</li>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
