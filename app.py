@@ -22,6 +22,8 @@ def homepage():
 	elif request.method == 'POST':
 		long_link = request.form['long_link'].encode('ascii','ignore')
 		short_link = request.form['short_link'].encode('ascii','ignore')
+		long_link = str(long_link)
+		short_link = str(short_link)
 		if session.query(Shortener).filter_by(short_link=short_link).scalar() is None:
 			if checkURI(long_link):
 				session.add(Shortener(short_link = short_link, long_link = long_link)) 	
@@ -42,10 +44,8 @@ def homepage():
 @app.route("/<short_link>")
 def redirectToURL(short_link):
 	short_link = short_link.encode('ascii','ignore')
-	link = 'wtf!'
-	if session.query(Shortener).filter_by(short_link = short_link).scalar() is not None:
-		link = session.query(Shortener).filter_by(short_link = short_link).first().long_link.encode('ascii')
-	return link
+	link = session.query(Shortener).filter_by(short_link = short_link).first().long_link.encode('ascii')
+	return redirect(link)
 	# else:
 		# return 'Invalid short name'
 
