@@ -42,11 +42,12 @@ def homepage():
 @app.route("/<short_link>")
 def redirectToURL(short_link):
 	short_link = short_link.encode('ascii','ignore')
+	link = 'wtf!'
 	if session.query(Shortener).filter_by(short_link = short_link).scalar() is not None:
 		link = session.query(Shortener).filter_by(short_link = short_link).first().long_link.encode('ascii')
-		return redirect(link)
-	else:
-		return 'Invalid short name'
+	return link
+	# else:
+		# return 'Invalid short name'
 
 def main():
 	port = int(os.environ.get("PORT",8000))
