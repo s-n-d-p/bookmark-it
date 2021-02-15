@@ -135,6 +135,9 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             self.wfile.write('Fill both fields correctly'.encode())
             return
 
+	def do_head(self):
+		pass 		    
+
 
         longuri = params["longuri"][0]
         shortname = params["shortname"][0]
